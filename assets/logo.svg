@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#7cf3ff"/>
+      <stop offset="100%" stop-color="#5b5bff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7cf3ff"/>
+      <stop offset="100%" stop-color="#b06bff"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="88" fill="none" stroke="url(#ring)" stroke-width="4"/>
+  <g stroke="url(#ring)" stroke-width="2.5" opacity="0.9">
+    <line x1="100" y1="100" x2="100" y2="34"/>
+    <line x1="100" y1="100" x2="157" y2="67"/>
+    <line x1="100" y1="100" x2="157" y2="133"/>
+    <line x1="100" y1="100" x2="100" y2="166"/>
+    <line x1="100" y1="100" x2="43" y2="133"/>
+    <line x1="100" y1="100" x2="43" y2="67"/>
+    <polyline points="100,34 157,67 157,133 100,166 43,133 43,67 100,34" fill="none"/>
+  </g>
+  <g fill="#7cf3ff">
+    <circle cx="100" cy="34" r="7"/><circle cx="157" cy="67" r="7"/><circle cx="157" cy="133" r="7"/>
+    <circle cx="100" cy="166" r="7"/><circle cx="43" cy="133" r="7"/><circle cx="43" cy="67" r="7"/>
+  </g>
+  <circle cx="100" cy="100" r="34" fill="url(#core)"/>
+  <text x="100" y="108" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0b0b2a">AGI</text>
+</svg>

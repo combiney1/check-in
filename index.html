@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>签到</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/kiosk.css">
+</head>
+<body class="kiosk">
+  <button id="admin-corner" type="button" aria-label="工作人员入口"></button>
+  <header class="kiosk-header">
+    <h1 id="event-title"></h1>
+    <span id="progress-count" class="pill"></span>
+  </header>
+  <div id="banner" class="banner" hidden></div>
+
+  <main>
+    <section id="screen-search" class="screen active" aria-label="搜索姓名">
+      <div class="search-box">
+        <input id="search-input" type="text" inputmode="none" autocomplete="off" autocapitalize="characters"
+               autocorrect="off" spellcheck="false" placeholder="输入姓名首字母" aria-label="姓名首字母">
+        <button id="system-kbd" type="button" class="ghost">中文输入</button>
+      </div>
+      <div id="results" class="results" aria-live="polite"></div>
+      <div id="keypad" class="keypad"></div>
+    </section>
+
+    <section id="screen-confirm" class="screen" aria-label="确认签到">
+      <button id="confirm-back" type="button" class="ghost back">← 不是我，返回</button>
+      <div id="hold-target" class="hold-target" role="button" aria-label="长按 1 秒签到">
+        <img id="hold-logo" class="hold-logo" alt="" draggable="false">
+        <svg class="hold-ring" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="hold-ring-bg" cx="50" cy="50" r="46"/>
+          <circle id="hold-ring-bar" class="hold-ring-bar" cx="50" cy="50" r="46"/>
+        </svg>
+        <div class="hold-text">
+          <div id="confirm-name" class="confirm-name"></div>
+          <div id="confirm-company" class="confirm-company"></div>
+        </div>
+      </div>
+      <p id="hold-hint" class="hold-hint">长按名字 1 秒完成签到</p>
+    </section>
+
+    <section id="screen-success" class="screen" aria-label="签到成功">
+      <img id="success-logo" class="success-logo" alt="" draggable="false">
+      <div class="success-check">签到成功</div>
+      <div class="success-welcome">欢迎，<span id="success-name"></span></div>
+      <div id="success-time" class="success-time"></div>
+      <p class="success-tip">轻触屏幕返回</p>
+    </section>
+  </main>
+
+  <script src="vendor/pinyin-pro.js"></script>
+  <script src="js/core/pinyin-keys.js"></script>
+  <script src="js/core/matcher.js"></script>
+  <script src="js/core/roster.js"></script>
+  <script src="js/core/store.js"></script>
+  <script src="js/ui/dom.js"></script>
+  <script src="js/ui/app-state.js"></script>
+  <script src="js/ui/hold.js"></script>
+  <script src="js/ui/kiosk.js"></script>
+  <script src="js/ui/sky-sync.js"></script>
+</body>
+</html>

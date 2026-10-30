@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>签到管理</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+  <div id="lock" class="lock">
+    <form id="lock-form" class="card lock-card">
+      <h2>工作人员登录</h2>
+      <input id="lock-pin" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN（默认 0000）" aria-label="PIN">
+      <button type="submit" class="primary">进入</button>
+      <a href="index.html" class="ghost">返回签到页</a>
+    </form>
+  </div>
+
+  <div id="admin-app" hidden>
+    <header class="admin-header">
+      <h1>签到管理</h1>
+      <div class="stats" id="stats"></div>
+      <span id="sky-link" class="pill" hidden></span>
+      <a href="index.html" class="primary">打开签到页</a>
+    </header>
+    <div id="admin-banner" class="banner" hidden></div>
+
+    <section class="card">
+      <h2>来宾名单</h2>
+      <div class="toolbar">
+        <input id="filter" type="search" placeholder="搜索姓名 / 首字母 / 公司" aria-label="筛选">
+        <select id="filter-status" aria-label="签到状态">
+          <option value="all">全部</option>
+          <option value="pending">未签到</option>
+          <option value="checked">已签到</option>
+          <option value="walkin">现场添加</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>姓名</th><th>公司</th><th>别名</th><th>拼音（核对）</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody id="guest-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="grid">
+      <form id="walkin-form" class="card">
+        <h2>现场添加来宾</h2>
+        <input name="name" placeholder="姓名 *" required maxlength="40">
+        <input name="company" placeholder="公司 / 部门" maxlength="80">
+        <input name="aliases" placeholder="别名 / 英文名（可选）" maxlength="80">
+        <label class="check"><input type="checkbox" name="checkInNow" checked> 添加后直接签到</label>
+        <button type="submit" class="primary">添加</button>
+      </form>
+
+      <section class="card">
+        <h2>导入名单</h2>
+        <p class="muted">每行一人。可直接从 Excel 复制粘贴，或上传 CSV。列：姓名, 公司, 别名（第一行可以是表头）。</p>
+        <textarea id="import-text" rows="6" placeholder="张三,ACME,Leo&#10;李四,WorkBuddy"></textarea>
+        <div class="row">
+          <input id="import-file" type="file" accept=".csv,.txt,text/csv,text/plain">
+          <button id="import-preview" type="button">预览</button>
+          <button id="import-apply" type="button" class="primary" disabled>确认导入</button>
+        </div>
+        <div id="import-result" class="muted"></div>
+      </section>
+
+      <section class="card">
+        <h2>数据与备份</h2>
+        <div class="row">
+          <button id="export-csv" type="button" class="primary">导出签到表 CSV</button>
+          <button id="export-json" type="button">下载完整备份</button>
+          <label class="file-btn">恢复备份<input id="restore-json" type="file" accept=".json,application/json" hidden></label>
+        </div>
+        <div class="row" id="demo-export-row">
+          <button id="export-demo" type="button" class="primary">导出单文件 Demo（HTML）</button>
+          <label class="check"><input id="export-demo-clear" type="checkbox" checked> 不带签到记录</label>
+        </div>
+        <div class="row" id="demo-reset-row" hidden>
+          <button id="demo-reset" type="button">重置为初始名单</button>
+          <span class="muted">这是导出的 Demo 文件，数据保存在打开它的浏览器里</span>
+        </div>
+        <p class="muted">每次签到都会写入本机存储，并每分钟保留一份自动快照（最多 5 份）。</p>
+        <div id="snapshots"></div>
+        <div class="row danger-zone">
+          <button id="reset-checkins" type="button" class="danger">清空所有签到记录</button>
+          <button id="clear-all" type="button" class="danger">删除全部名单</button>
+        </div>
+      </section>
+
+      <form id="settings-form" class="card">
+        <h2>活动设置</h2>
+        <label>活动名称<input name="eventTitle" maxlength="60"></label>
+        <label>管理 PIN<input name="adminPin" inputmode="numeric" maxlength="12" placeholder="留空保持不变"></label>
+        <div class="row logo-row">
+          <img id="logo-preview" alt="logo 预览">
+          <label class="file-btn">上传 logo<input id="logo-file" type="file" accept="image/*" hidden></label>
+          <button id="logo-reset" type="button">恢复默认 logo</button>
+        </div>
+        <button type="submit" class="primary">保存设置</button>
+      </form>
+
+      <section class="card">
+        <h2>操作日志</h2>
+        <ol id="log" class="log"></ol>
+      </section>
+    </section>
+  </div>
+
+  <script src="vendor/pinyin-pro.js"></script>
+  <script src="js/core/pinyin-keys.js"></script>
+  <script src="js/core/matcher.js"></script>
+  <script src="js/core/roster.js"></script>
+  <script src="js/core/store.js"></script>
+  <script src="js/ui/dom.js"></script>
+  <script src="js/ui/app-state.js"></script>
+  <script src="js/ui/demo-export.js"></script>
+  <script src="js/ui/admin-io.js"></script>
+  <script src="js/ui/admin.js"></script>
+  <script src="js/ui/sky-sync.js"></script>
+</body>
+</html>

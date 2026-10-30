@@ -1,0 +1,64 @@
+/* Star screen: full-window canvas with the event title on top. */
+body.screen {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none;
+  background: radial-gradient(1400px 900px at 50% 110%, #1a1450 0%, #07071a 55%, #03030c 100%) fixed, #03030c;
+}
+
+#sky { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+
+.screen-title {
+  position: fixed;
+  top: 9vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56vw;
+  text-align: center;
+  pointer-events: none;
+}
+
+.screen-logo {
+  width: min(34vw, 640px);
+  height: auto;
+  filter: drop-shadow(0 0 24px rgba(124, 243, 255, 0.35));
+}
+
+.screen-logo[hidden] + h1 { margin-top: 6vh; }
+
+.screen-title h1 {
+  margin: 2.4vh 0 0;
+  font-size: clamp(28px, 4.2vw, 88px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.screen-status {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+  opacity: 0.7;
+}
+
+.screen-tip {
+  position: fixed;
+  bottom: 3vh;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  opacity: 0.6;
+  transition: opacity 0.6s;
+}
+
+.screen-tip.gone { opacity: 0; }

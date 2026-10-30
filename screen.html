@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>星空大屏</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/screen.css">
+</head>
+<body class="screen">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <header class="screen-title">
+    <img id="screen-logo" class="screen-logo" src="assets/logo.png" alt="">
+    <h1 id="screen-event">AGI + WorkBuddy 分享会</h1>
+  </header>
+  <div id="screen-status" class="screen-status" hidden title="未连接签到服务"></div>
+  <p id="screen-tip" class="screen-tip">点击任意位置全屏</p>
+
+  <script src="js/core/sky.js"></script>
+  <script src="js/ui/screen.js"></script>
+</body>
+</html>
